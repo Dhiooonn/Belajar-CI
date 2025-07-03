@@ -35,6 +35,8 @@ $routes->group('keranjang', ['filter' => 'auth'], function ($routes) {
     $routes->get('clear', 'TransaksiController::cart_clear'); // Rute ini digunakan untuk mengosongkan keranjang belanja
 });
 
+$routes->get('checkout', 'TransakiController::checkout', ['filter' => 'auth']);
+
 $routes->get('/auth', 'AuthController::index');
 $routes->get('/faq', 'FaqController::index');
 $routes->get('/profile', 'ProfileController::index');
