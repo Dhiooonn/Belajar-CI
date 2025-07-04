@@ -35,7 +35,12 @@ $routes->group('keranjang', ['filter' => 'auth'], function ($routes) {
     $routes->get('clear', 'TransaksiController::cart_clear'); // Rute ini digunakan untuk mengosongkan keranjang belanja
 });
 
-$routes->get('checkout', 'TransakiController::checkout', ['filter' => 'auth']);
+$routes->get('checkout', 'TransaksiController::checkout', ['filter' => 'auth']); // Route Checkout
+$routes->post('buy', 'TransaksiController::buy', ['filter' => 'auth']); // Route buy
+
+// Akses dua endpoint yang sudah dicoba pada postman
+$routes->get('get-location', 'TransaksiController::getLocation', ['filter' => 'auth']);
+$routes->get('get-cost', 'TransaksiController::getCost', ['filter' => 'auth']);
 
 $routes->get('/auth', 'AuthController::index');
 $routes->get('/faq', 'FaqController::index');
