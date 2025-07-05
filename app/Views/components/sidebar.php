@@ -8,6 +8,8 @@
             </a>
         </li>
         <!-- End Dashboard Nav -->
+
+        <!-- Keranjang -->
         <li class="nav-item">
             <a class="nav-link <?php echo (uri_string() == 'keranjang') ? "" : "collapsed" ?>" href="keranjang">
                 <i class="bi bi-cart-check"></i>
@@ -19,19 +21,20 @@
         <?php
         if (session()->get('role') == 'admin') {
         ?>
+
+        <!-- Produk  -->
         <li class="nav-item">
             <a class="nav-link <?php echo (uri_string() == 'produk') ? "" : "collapsed" ?>" href="produk">
                 <i class="bi bi-receipt"></i>
                 <span>Produk</span>
             </a>
-        </li><!-- End Produk Nav -->
+        </li>
+        <!-- End Produk -->
         <?php
         }
         ?>
-        <!-- End produk Nav -->
 
         <!-- Product Category  -->
-
         <li class="nav-item">
             <a class="nav-link <?php echo (uri_string() == 'productcategory') ? "" : "collapsed" ?>"
                 href="productcategory">
@@ -42,17 +45,15 @@
         <!-- end Product Category  -->
 
         <!-- Profile  -->
-
         <li class="nav-item">
             <a class="nav-link <?php echo (uri_string() == 'profile') ? "" : "collapsed" ?>" href="profile">
                 <i class="bi bi-person"></i>
                 <span>Profile</span>
             </a>
         </li>
-        <!-- end Profile  -->
+        <!-- End Profile Nav -->
 
         <!-- FAQ  -->
-
         <li class="nav-item">
             <a class="nav-link <?php echo (uri_string() == 'faq') ? "" : "collapsed" ?>" href="faq">
                 <i class="bi bi-question-circle"></i>
@@ -62,7 +63,6 @@
         <!-- end FAQ  -->
 
         <!-- Contact  -->
-
         <li class="nav-item">
             <a class="nav-link <?php echo (uri_string() == 'contact') ? "" : "collapsed" ?>" href="contact">
                 <i class="bi bi-telephone"></i>
@@ -70,12 +70,6 @@
             </a>
         </li>
         <!-- end Contact  -->
-
-
-
-
-
     </ul>
-
 </aside>
 <!-- End Sidebar-->

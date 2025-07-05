@@ -35,21 +35,24 @@ $routes->group('keranjang', ['filter' => 'auth'], function ($routes) {
     $routes->get('clear', 'TransaksiController::cart_clear'); // Rute ini digunakan untuk mengosongkan keranjang belanja
 });
 
-$routes->get('checkout', 'TransaksiController::checkout', ['filter' => 'auth']); // Route Checkout
-$routes->post('buy', 'TransaksiController::buy', ['filter' => 'auth']); // Route buy
-
-// Akses dua endpoint yang sudah dicoba pada postman
-$routes->get('get-location', 'TransaksiController::getLocation', ['filter' => 'auth']);
-$routes->get('get-cost', 'TransaksiController::getCost', ['filter' => 'auth']);
-
-$routes->get('/auth', 'AuthController::index');
-$routes->get('/faq', 'FaqController::index');
-$routes->get('/profile', 'ProfileController::index');
-$routes->get('/contact', 'ContactController::index');
-
 $routes->group('productcategory', ['filter' => 'auth'], function ($routes) { 
     $routes->get('', 'ProductCategoryController::index');
     $routes->post('', 'ProductCategoryController::create');
     $routes->post('edit/(:any)', 'ProductCategoryController::edit/$1');
     $routes->get('delete/(:any)', 'ProductCategoryController::delete/$1');
 });
+
+$routes->get('checkout', 'TransaksiController::checkout', ['filter' => 'auth']); // Route Checkout
+$routes->post('buy', 'TransaksiController::buy', ['filter' => 'auth']); // Route buy
+
+// Akses dua endpoint yang sudah dicoba pada postman
+$routes->get('get-location', 'TransaksiController::getLocation', ['filter' => 'auth']);
+$routes->get('get-cost', 'TransaksiController::getCost', ['filter' => 'auth']);
+$routes->get('profile', 'Home::profile', ['filter' => 'auth']); // Router Profile
+
+$routes->get('/auth', 'AuthController::index');
+$routes->get('/faq', 'FaqController::index');
+$routes->get('/profile', 'ProfileController::index');
+$routes->get('/contact', 'ContactController::index');
+
+$routes->resource('api', ['controller' => 'apiController']); // Router API
