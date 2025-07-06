@@ -73,45 +73,45 @@ class ProdukController extends BaseController
     return redirect('produk')->with('success', 'Data Berhasil Diubah');
 }
 
-public function delete($id)
-{
-    $dataProduk = $this->product->find($id);
+    public function delete($id)
+    {
+        $dataProduk = $this->product->find($id);
 
-    if ($dataProduk['foto'] != '' and file_exists("img/" . $dataProduk['foto'] . "")) {
-        unlink("img/" . $dataProduk['foto']);
+        if ($dataProduk['foto'] != '' and file_exists("img/" . $dataProduk['foto'] . "")) {
+            unlink("img/" . $dataProduk['foto']);
+        }
+
+        $this->product->delete($id);
+
+        return redirect('produk')->with('success', 'Data Berhasil Dihapus');
     }
+    public function download()
+    {
+        // untuk waktu real time di pdf download on 
+        date_default_timezone_set('Asia/Jakarta');
 
-    $this->product->delete($id);
+            //get data from database
+        $product = $this->product->findAll();
 
-    return redirect('produk')->with('success', 'Data Berhasil Dihapus');
-}
-public function download()
-{
-    // untuk waktu real time di pdf download on 
-    date_default_timezone_set('Asia/Jakarta');
+            //pass data to file view
+        $html = view('v_produkPDF', ['product' => $product]);
 
-		//get data from database
-    $product = $this->product->findAll();
+            //set the pdf filename
+        $filename = date('y-m-d-H-i-s') . '-produk';
 
-		//pass data to file view
-    $html = view('v_produkPDF', ['product' => $product]);
+        // instantiate and use the dompdf class
+        $dompdf = new Dompdf();
 
-		//set the pdf filename
-    $filename = date('y-m-d-H-i-s') . '-produk';
+        // load HTML content (file view)
+        $dompdf->loadHtml($html);
 
-    // instantiate and use the dompdf class
-    $dompdf = new Dompdf();
+        // (optional) setup the paper size and orientation
+        $dompdf->setPaper('A4', 'potrait');
 
-    // load HTML content (file view)
-    $dompdf->loadHtml($html);
+        // render html as PDF
+        $dompdf->render();
 
-    // (optional) setup the paper size and orientation
-    $dompdf->setPaper('A4', 'potrait');
-
-    // render html as PDF
-    $dompdf->render();
-
-    // output the generated pdf
-    $dompdf->stream($filename);
-}
+        // output the generated pdf
+        $dompdf->stream($filename);
+    }
 }

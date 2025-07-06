@@ -41,8 +41,19 @@ class ApiController extends ResourceController
                 $penjualan = $this->transaction->findAll();
                 
                 foreach ($penjualan as &$pj) {
-                    $pj['details'] = $this->transaction_detail->where('transaction_id', $pj['id'])->findAll();
+                    $details = $this->transaction_detail
+                        ->select('jumlah')
+                        ->where('transaction_id', $pj['id'])
+                        ->findAll();
+
+                    $jumlah_item = 0;
+                    foreach ($details as $detail) {
+                        $jumlah_item += $detail['jumlah']; // pastikan field-nya bernama 'jumlah'
+                    }
+
+                    $pj['jumlah_item'] = $jumlah_item;
                 }
+
 
                 $data['status'] = ["code" => 200, "description" => "OK"];
                 $data['results'] = $penjualan;

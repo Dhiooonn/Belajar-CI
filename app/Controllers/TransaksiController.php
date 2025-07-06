@@ -88,8 +88,9 @@ class TransaksiController extends BaseController
     }
 
     // Function getLocatio 
-    public function getLocation() {
-        //keyword pencarian yang dikirimkan dari halaman checkout
+    public function getLocation()
+    {
+            //keyword pencarian yang dikirimkan dari halaman checkout
         $search = $this->request->getGet('search');
 
         $response = $this->client->request(
@@ -106,12 +107,12 @@ class TransaksiController extends BaseController
         return $this->response->setJSON($body['data']);
     }
 
-    // function getCost
-    public function getCost() { 
-        //ID lokasi yang dikirimkan dari halaman checkout
+    public function getCost()
+    { 
+            //ID lokasi yang dikirimkan dari halaman checkout
         $destination = $this->request->getGet('destination');
 
-        //parameter daerah asal pengiriman, berat produk, dan kurir dibuat statis
+            //parameter daerah asal pengiriman, berat produk, dan kurir dibuat statis
         //valuenya => 64999 : PEDURUNGAN TENGAH , 1000 gram, dan JNE
         $response = $this->client->request(
             'POST', 
@@ -146,39 +147,56 @@ class TransaksiController extends BaseController
     }
     
     // Function buy()
-    public function buy(){
-        if ($this->request->getPost()) { 
+    public function buy()
+    {
+        if ($this->request->getPost()) {
+
+            $diskon_per_item = session()->get('diskon_nominal') ?? 0;
+
+            $total = 0;
+            $total_diskon = 0;
+
+            foreach ($this->cart->contents() as $value) {
+                $subtotal = $value['price'] * $value['qty'];
+                $diskon = $diskon_per_item * $value['qty'];
+
+                $total += $subtotal;
+                $total_diskon += $diskon;
+            }
+
             $dataForm = [
-                'username' => $this->request->getPost('username'),
-                'total_harga' => $this->request->getPost('total_harga'),
-                'alamat' => $this->request->getPost('alamat'),
-                'ongkir' => $this->request->getPost('ongkir'),
-                'status' => 0,
-                'created_at' => date("Y-m-d H:i:s"),
-                'updated_at' => date("Y-m-d H:i:s")
+                'username'    => $this->request->getPost('username'),
+                'total_harga' => $total - $total_diskon,
+                'alamat'      => $this->request->getPost('alamat'),
+                'ongkir'      => $this->request->getPost('ongkir'),
+                'status'      => 0,
+                'created_at'  => date("Y-m-d H:i:s"),
+                'updated_at'  => date("Y-m-d H:i:s")
             ];
 
             $this->transaction->insert($dataForm);
-
             $last_insert_id = $this->transaction->getInsertID();
 
             foreach ($this->cart->contents() as $value) {
+                $qty = $value['qty'];
+                $harga = $value['price'];
+                $diskon_total_item = $diskon_per_item * $qty;
+
                 $dataFormDetail = [
                     'transaction_id' => $last_insert_id,
-                    'product_id' => $value['id'],
-                    'jumlah' => $value['qty'],
-                    'diskon' => 0,
-                    'subtotal_harga' => $value['qty'] * $value['price'],
-                    'created_at' => date("Y-m-d H:i:s"),
-                    'updated_at' => date("Y-m-d H:i:s")
+                    'product_id'     => $value['id'],
+                    'jumlah'         => $qty,
+                    'diskon'         => $diskon_total_item,
+                    'subtotal_harga' => ($harga * $qty) - $diskon_total_item,
+                    'created_at'     => date("Y-m-d H:i:s"),
+                    'updated_at'     => date("Y-m-d H:i:s")
                 ];
 
                 $this->transaction_detail->insert($dataFormDetail);
             }
 
             $this->cart->destroy();
-    
             return redirect()->to(base_url());
         }
-    }  
+    }
 }
