@@ -104,7 +104,7 @@ Proyek menggunakan struktur MVC CodeIgniter 4:
   - AuthController.php - Autentikasi pengguna
   - ProdukController.php - Manajemen produk
   - TransaksiController.php - Proses transaksi
-  - DiskonCOntroller.php - untuk proses pemberian Diskon saat checkout
+  - DiskonController.php - untuk proses pemberian Diskon saat checkout
 - app/Models - Model untuk interaksi database
   - ProductModel.php - Model produk
   - UserModel.php - Model pengguna
