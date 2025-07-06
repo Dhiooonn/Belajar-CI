@@ -44,6 +44,23 @@
         </li>
         <!-- end Product Category  -->
 
+        <!-- Diskon  -->
+        <?php
+        if (session()->get('role') == 'admin') {
+        ?>
+
+        <li class="nav-item">
+            <a class="nav-link <?php echo (uri_string() == 'diskon') ? "" : "collapsed" ?>" href="diskon">
+                <i class="bi bi-tag-fill"></i>
+                <span>Diskon</span>
+            </a>
+        </li>
+
+        <?php
+        }
+        ?>
+        <!-- end Diskon  -->
+
         <!-- Profile  -->
         <li class="nav-item">
             <a class="nav-link <?php echo (uri_string() == 'profile') ? "" : "collapsed" ?>" href="profile">

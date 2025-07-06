@@ -42,6 +42,18 @@ $routes->group('productcategory', ['filter' => 'auth'], function ($routes) {
     $routes->get('delete/(:any)', 'ProductCategoryController::delete/$1');
 });
 
+// Roter Diskon
+// app/Config/Routes.php
+
+// Anda sudah punya ini, ini sudah benar!
+$routes->group('diskon', ['filter' => 'auth'], function ($routes) {
+    $routes->get('/', 'DiskonController::index');
+    $routes->post('store', 'DiskonController::store');
+    $routes->get('edit/(:num)', 'DiskonController::edit/$1'); // Digunakan untuk AJAX
+    $routes->post('update/(:num)', 'DiskonController::update/$1');
+    $routes->get('delete/(:num)', 'DiskonController::delete/$1');
+});
+
 $routes->get('checkout', 'TransaksiController::checkout', ['filter' => 'auth']); // Route Checkout
 $routes->post('buy', 'TransaksiController::buy', ['filter' => 'auth']); // Route buy
 

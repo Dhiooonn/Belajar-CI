@@ -19,6 +19,14 @@
      </div>
      <!-- End Search Bar -->
 
+     <!-- Informasi Diskon -->
+     <?php if (session()->get('diskon_nominal')): ?>
+     <div class=" bg-success text-white text-center py-2 mx-3 px-5" style="font-weight: bold;">
+         Diskon Hari Ini: Rp<?= number_format(session()->get('diskon_nominal'), 0, ',', '.')?>
+     </div>
+     <?php endif; ?>
+     <!-- Informasi Diskon - END -->
+
      <nav class="header-nav ms-auto">
          <ul class="d-flex align-items-center">
              <li class="nav-item d-block d-lg-none">
@@ -27,6 +35,7 @@
                  </a>
              </li>
              <!-- End Search Icon-->
+
 
              <li class="nav-item dropdown">
                  <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
