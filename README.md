@@ -1,42 +1,67 @@
-# Toko Online CodeIgniter 4
+# 🛒 Toko Online - CodeIgniter 4
 
-Proyek ini adalah platform toko online yang dibangun menggunakan [CodeIgniter 4](https://codeigniter.com/). Sistem ini menyediakan beberapa fungsionalitas untuk toko online, termasuk manajemen produk, keranjang belanja, dan sistem transaksi.
+Proyek ini adalah platform toko online modern yang dibangun menggunakan [CodeIgniter 4](https://codeigniter.com/). Sistem ini menyediakan fungsionalitas lengkap seperti manajemen produk, keranjang belanja, checkout dengan ongkos kirim, diskon harian, API transaksi, serta dashboard laporan berbasis web service.
 
-## Daftar Isi
+---
 
-- [Fitur](#fitur)
-- [Persyaratan Sistem](#persyaratan-sistem)
-- [Instalasi](#instalasi)
-- [Struktur Proyek](#struktur-proyek)
+## 📑 Daftar Isi
 
-## Fitur
+- [✨ Fitur](#-fitur)
+- [⚙️ Persyaratan Sistem](#️-persyaratan-sistem)
+- [🚀 Instalasi](#-instalasi)
+- [📁 Struktur Proyek](#-struktur-proyek)
+- [🔌 Web Service / API](#-web-service--api)
 
-- Katalog Produk
-  - Tampilan produk dengan gambar
-  - Pencarian produk
-- Keranjang Belanja
-  - Tambah/hapus produk
-  - Update jumlah produk
-- Sistem Transaksi
-  - Proses checkout
-  - Riwayat transaksi
-- Panel Admin
-  - Manajemen produk (CRUD)
-  - Manajemen kategori
-  - Laporan transaksi
-  - Export data ke PDF
-- Sistem Autentikasi
-  - Login/Register pengguna
-  - Manajemen akun
-- UI Responsif dengan NiceAdmin template
+---
 
-## Persyaratan Sistem
+## ✨ Fitur
+
+### 🎯 Fitur Umum
+- ✅ Katalog produk + pencarian
+- ✅ Keranjang belanja (CRUD)
+- ✅ Checkout dengan ongkos kirim (RajaOngkir)
+- ✅ Diskon harian otomatis saat login
+- ✅ Riwayat transaksi
+
+### 🔐 Sistem Autentikasi
+- Login/Register
+- Role-based session (admin/user)
+
+### 🛒 Panel Admin
+- Manajemen Produk (CRUD)
+- Manajemen Kategori Produk
+- Manajemen Diskon (CRUD)
+- Export laporan transaksi ke PDF
+
+### 📊 Dashboard API
+- Dashboard laporan transaksi via web service `API`
+- Menampilkan total item per transaksi
+- Filter transaksi berdasarkan status selesai
+
+---
+
+## ⚙️ Persyaratan Sistem
 
 - PHP >= 8.2
 - Composer
-- Web server (XAMPP)
+- MySQL
+- XAMPP / Laragon / Web server
 
-## Instalasi
+---
+
+## 🚀 Instalasi
+
+1. **Clone repository**
+   ```bash
+   git clone [URL repository]
+   cd belajar-ci-tugas
+
+
+1. **Clone repository**
+   ```bash
+   git clone [URL repository]
+   cd belajar-ci-tugas
+
 
 1. **Clone repository ini**
    ```bash
@@ -79,6 +104,7 @@ Proyek menggunakan struktur MVC CodeIgniter 4:
   - AuthController.php - Autentikasi pengguna
   - ProdukController.php - Manajemen produk
   - TransaksiController.php - Proses transaksi
+  - DiskonCOntroller.php - untuk proses pemberian Diskon saat checkout
 - app/Models - Model untuk interaksi database
   - ProductModel.php - Model produk
   - UserModel.php - Model pengguna
