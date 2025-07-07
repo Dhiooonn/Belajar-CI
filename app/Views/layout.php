@@ -116,6 +116,7 @@ if(uri_string()!=""){
     <script src="<?= base_url()?>NiceAdmin/assets/js/main.js"></script>
 
     <?= $this->renderSection('script') ?>
+    <?= $this->renderSection('scripts') ?>
 </body>
 
 </html>

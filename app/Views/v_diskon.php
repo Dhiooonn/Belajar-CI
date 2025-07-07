@@ -114,8 +114,8 @@
 
 <?= $this->endSection(); ?>
 
-
 <?= $this->section('scripts'); ?>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     console.log("DEBUG: Halaman selesai dimuat. Script dijalankan.");
