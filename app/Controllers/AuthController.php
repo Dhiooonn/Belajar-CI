@@ -45,10 +45,8 @@ class AuthController extends BaseController
                     // ✅ Cek diskon hari ini
                     $diskonModel = new \App\Models\DiskonModel();
                     $hariIni = date('Y-m-d');
-                    $diskon = $diskonModel
-                        ->where('tanggal >=', $hariIni . ' 00:00:00')
-                        ->where('tanggal <=', $hariIni . ' 23:59:59')
-                        ->first();      
+                    $diskon = $diskonModel->where('tanggal', $hariIni)->first();
+      
 
                     if ($diskon) {
                         session()->set('diskon_nominal', $diskon['nominal']);
